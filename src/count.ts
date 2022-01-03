@@ -1,4 +1,3 @@
-import * as core from '@actions/core'
 import {GitHub} from '@actions/github/lib/utils'
 
 export async function count(
@@ -6,9 +5,8 @@ export async function count(
   search: string
 ): Promise<number> {
   const response = await octokit.rest.search.code({
-    q: `${'actions checkout'} language:yaml path:.github/workflows`
+    q: `${search} language:yaml path:.github/workflows`
   })
 
-  core.info(JSON.stringify(response))
   return response.data.total_count
 }

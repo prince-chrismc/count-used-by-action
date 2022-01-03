@@ -16,4 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - id: count
+        uses: ./
+      - run: echo 'Found ${{ steps.count.outputs.counted }} callers'

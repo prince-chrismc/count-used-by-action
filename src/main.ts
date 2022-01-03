@@ -5,7 +5,7 @@ import {count} from './count'
 
 async function run(): Promise<void> {
   try {
-    const githubToken = core.getInput('github_token', {required: true})
+    const githubToken = core.getInput('github_token', {required: true}) // Since there's a default it should never be empty
     const octokit = github.getOctokit(githubToken)
     const repo = github.context.repo
     const actionName: Readonly<string> = `${repo.owner} ${repo.repo}`
