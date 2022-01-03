@@ -40,7 +40,8 @@ const core = __importStar(__nccwpck_require__(2186));
 function count(octokit, search) {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield octokit.rest.search.code({
-            q: encodeURIComponent(`${search} language:yaml path:.github/workflows`)
+            q: 'prince-chrismc+label-merge-conflicts-action+language%3Ayaml+path%3A.github%2Fworkflows'
+            //encodeURIComponent(`${search} language:yaml path:.github/workflows`)
         });
         core.info(JSON.stringify(response));
         return response.data.total_count;
