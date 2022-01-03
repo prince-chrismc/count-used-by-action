@@ -1,18 +1,19 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import * as github from '@actions/github'
+
+import {count} from './count'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    const githubToken = core.getInput('github_token')
+    const octokit = github.getOctokit(githubToken)
+    const actionName: Readonly<string> = github.repository.split('/').join(' ')
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    core.setOutput('time', new Date().toTimeString())
+    const count = await permitted(octokit, github.context, actionName)
+    core.info(`🧮 Found ${actionName} called ${count} times`)
+    core.setOutput('counted', `${count}`)
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+    if (error instanceof Error) core.setFailed(error)
   }
 }
 
