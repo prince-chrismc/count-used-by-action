@@ -74,7 +74,7 @@ function run() {
             const octokit = github.getOctokit(githubToken);
             const repo = github.context.repo;
             const actionName = `${repo.owner} ${repo.repo}`;
-            const counted = yield (0, count_1.count)(octokit, 'actions checkout');
+            const counted = yield (0, count_1.count)(octokit, 'prince-chrismc label-merge-conflicts-action');
             core.info(`🧮 Found ${actionName} called ${counted} times`);
             core.setOutput('counted', `${counted}`);
         }
