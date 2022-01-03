@@ -7,11 +7,12 @@ async function run(): Promise<void> {
   try {
     const githubToken = core.getInput('github_token')
     const octokit = github.getOctokit(githubToken)
-    const actionName: Readonly<string> = github.repository.split('/').join(' ')
+    const repo = github.context.repo
+    const actionName: Readonly<string> = `${repo.owner} ${repo.repo}`
 
-    const count = await permitted(octokit, github.context, actionName)
-    core.info(`🧮 Found ${actionName} called ${count} times`)
-    core.setOutput('counted', `${count}`)
+    const counted = await count(octokit, actionName)
+    core.info(`🧮 Found ${actionName} called ${counted} times`)
+    core.setOutput('counted', `${counted}`)
   } catch (error) {
     if (error instanceof Error) core.setFailed(error)
   }

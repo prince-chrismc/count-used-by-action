@@ -2,7 +2,7 @@ import * as core from '@actions/core'
 import * as github from '@actions/github'
 import nock from 'nock'
 
-import { count } from '../src/count'
+import {count} from '../src/count'
 import {
   expect,
   test,
@@ -16,9 +16,6 @@ import {
 // Inputs for mock @actions/core
 let inputs = {} as any
 
-// Shallow clone original @actions/github context
-let originalContext = { ...github.context }
-
 describe('queries', () => {
   beforeAll(() => {
     // Mock getInput
@@ -31,8 +28,7 @@ describe('queries', () => {
     jest.spyOn(core, 'warning').mockImplementation(jest.fn())
     jest.spyOn(core, 'info').mockImplementation(jest.fn())
     jest.spyOn(core, 'debug').mockImplementation(jest.fn())
-    jest.spyOn(core, 'startGroup').mockImplementation(jest.fn())
-    jest.spyOn(core, 'endGroup').mockImplementation(jest.fn())
+    jest.spyOn(core, 'setOutput').mockImplementation(jest.fn())
     jest.spyOn(core, 'setFailed').mockImplementation(jest.fn())
 
     // Mock github context
@@ -42,26 +38,14 @@ describe('queries', () => {
         repo: 'some-repo'
       }
     })
-    github.context.ref = 'refs/heads/some-ref'
-    github.context.sha = '1234567890123456789012345678901234567890'
-    github.context.eventName = 'push'
-    github.context.actor = 'buster'
   })
 
   beforeEach(() => {
     // Reset inputs
     inputs = {}
-    github.context.eventName = originalContext.eventName
-    github.context.payload = originalContext.payload
   })
 
   afterAll(() => {
-    // Restore @actions/github context
-    github.context.ref = originalContext.ref
-    github.context.sha = originalContext.sha
-    github.context.eventName = originalContext.eventName
-    github.context.actor = originalContext.actor
-
     // Restore
     jest.restoreAllMocks()
   })
@@ -81,7 +65,7 @@ describe('queries', () => {
 
     const octokit = github.getOctokit('justafaketoken')
 
-    const counted = await count(octokit, github.context, 'actions checkout')
+    const counted = await count(octokit, 'actions checkout')
     expect(counted).toBe(101)
   })
 
@@ -95,21 +79,22 @@ describe('queries', () => {
         `/search/code?q=actions%2520checkout%2520language%253Ayaml%2520path%253A.github%252Fworkflows`
       )
       .reply(422, {
-        "message": "Validation Failed",
-        "errors": [
+        message: 'Validation Failed',
+        errors: [
           {
-            "message": "Must include at least one user, organization, or repository",
-            "resource": "Search",
-            "field": "q",
-            "code": "invalid"
+            message:
+              'Must include at least one user, organization, or repository',
+            resource: 'Search',
+            field: 'q',
+            code: 'invalid'
           }
         ],
-        "documentation_url": "https://docs.github.com/v3/search/"
+        documentation_url: 'https://docs.github.com/v3/search/'
       })
 
     const octokit = github.getOctokit('justafaketoken')
 
-    const counted = count(octokit, github.context, 'actions checkout')
+    const counted = count(octokit, 'actions checkout')
     await expect(counted).rejects.toThrowError()
   })
 })
