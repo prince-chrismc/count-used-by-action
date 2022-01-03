@@ -1,11 +1,17 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Count Used By'
+description: 'Determine the number of times your action is called in workflows across GitHub'
+author: "prince-chrismc"
+branding:
+  icon: "check"
+  color: "green"
+outputs:
+  counted:
+    description: The number of search matches using your action
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  github_token:
+    description: A GitHub token.
+    required: false
+    default: ${{ github.token }}
 runs:
   using: 'node12'
   main: 'dist/index.js'
