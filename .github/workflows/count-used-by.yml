@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - id: count
-      uses: prince-chrismc/count-used-by-action@v1
+      uses: prince-chrismc/count-used-by-action@main
     - uses: actions/checkout@v2
     - run: |
        echo '{
