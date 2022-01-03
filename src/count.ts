@@ -6,8 +6,7 @@ export async function count(
   search: string
 ): Promise<number> {
   const response = await octokit.rest.search.code({
-    q: 'prince-chrismc+label-merge-conflicts-action+language%3Ayaml+path%3A.github%2Fworkflows'
-    //encodeURIComponent(`${search} language:yaml path:.github/workflows`)
+    q: `${search} language:yaml path:.github/workflows`
   })
 
   core.info(JSON.stringify(response))
