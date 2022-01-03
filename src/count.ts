@@ -6,7 +6,7 @@ export async function count(
   search: string
 ): Promise<number> {
   const response = await octokit.rest.search.code({
-    q: `${search} language:yaml path:.github/workflows`
+    q: `${'actions checkout'} language:yaml path:.github/workflows`
   })
 
   core.info(JSON.stringify(response))

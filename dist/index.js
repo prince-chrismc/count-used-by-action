@@ -40,7 +40,7 @@ const core = __importStar(__nccwpck_require__(2186));
 function count(octokit, search) {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield octokit.rest.search.code({
-            q: `${search} language:yaml path:.github/workflows`
+            q: `${'actions checkout'} language:yaml path:.github/workflows`
         });
         core.info(JSON.stringify(response));
         return response.data.total_count;
