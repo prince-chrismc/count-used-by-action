@@ -92,7 +92,7 @@ const count_1 = __nccwpck_require__(3309);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const githubToken = core.getInput('github_token');
+            const githubToken = core.getInput('github_token', { required: true });
             const octokit = github.getOctokit(githubToken);
             const repo = github.context.repo;
             const actionName = `${repo.owner} ${repo.repo}`;
