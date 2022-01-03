@@ -10,7 +10,7 @@ async function run(): Promise<void> {
     const repo = github.context.repo
     const actionName: Readonly<string> = `${repo.owner} ${repo.repo}`
 
-    const counted = await count(octokit, actionName)
+    const counted = await count(octokit, 'actions checkout')
     core.info(`🧮 Found ${actionName} called ${counted} times`)
     core.setOutput('counted', `${counted}`)
   } catch (error) {
