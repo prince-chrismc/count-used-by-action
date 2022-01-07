@@ -57,7 +57,7 @@ describe('queries', () => {
       }
     })
       .get(
-        `/search/code?q=actions%2520checkout%2520language%253Ayaml%2520path%253A.github%252Fworkflows`
+        `/search/code?q=actions%20checkout%20language%3Ayaml%20path%3A.github%2Fworkflows`
       )
       .reply(200, {
         total_count: 101
@@ -76,7 +76,7 @@ describe('queries', () => {
       }
     })
       .get(
-        `/search/code?q=actions%2520checkout%2520language%253Ayaml%2520path%253A.github%252Fworkflows`
+        `/search/code?q=actions%20checkout%20language%3Ayaml%20path%3A.github%2Fworkflows`
       )
       .reply(422, {
         message: 'Validation Failed',
