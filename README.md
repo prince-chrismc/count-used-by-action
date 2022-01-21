@@ -4,8 +4,6 @@
 [![codecov](https://img.shields.io/codecov/c/github/prince-chrismc/count-used-by-action)](https://codecov.io/gh/prince-chrismc/count-used-by-action)
 ![used by](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/prince-chrismc/count-used-by-action/main/.github/used-by.json)
 
-## Purpose
-
 A GitHub Action to determine the number of times your action is called in workflows across GitHub.
 
 ## Getting Started
