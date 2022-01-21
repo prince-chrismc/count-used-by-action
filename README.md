@@ -21,7 +21,7 @@ steps:
 
 ### Periodically Creating a Badge
 
-To have the workflow generate a badge, use the action as follows:
+To have the workflow generate a badge, try usinng the action as follows:
 
 ```yaml
 name: Count Used By
@@ -47,7 +47,7 @@ jobs:
          "namedLogo": "githubactions",
          "logoColor": "#fff"
        }' > .github/used-by.json
-    - uses: EndBug/add-and-commit@v7
+    - uses: EndBug/add-and-commit@v8
       with:
         default_author: github_actions
 ```
