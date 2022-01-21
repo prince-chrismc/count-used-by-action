@@ -28,7 +28,7 @@ name: Count Used By
 
 on:
   schedule:
-    - cron: "0 0 0 ? * * *" # Everyday
+    - cron: "0 0 * * *" # Everyday
   workflow_dispatch: {}
     
 jobs:
