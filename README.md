@@ -1,4 +1,6 @@
-# Count Used By Action
+# Deprecated: ⚠️ [There's now official support for this in GitHub's UI][ref] ⚠️
+
+[ref]: https://github.blog/2022-01-31-dependency-graph-now-supports-github-actions/
 
 [![MIT](https://img.shields.io/github/license/prince-chrismc/count-used-by-action)](https://github.com/prince-chrismc/count-used-by-action/blob/main/LICENSE)
 [![codecov](https://img.shields.io/codecov/c/github/prince-chrismc/count-used-by-action)](https://codecov.io/gh/prince-chrismc/count-used-by-action)
